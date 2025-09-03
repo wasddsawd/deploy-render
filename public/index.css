@@ -63,7 +63,7 @@ hr {
 #lupa{
   height: 20px;
   width: 20px;
-  background-image: url(/public/frontend/images/1093183.svg);
+  background-image: url(/public/Images/1093183.svg);
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -103,6 +103,12 @@ hr {
   display: flex;
   flex-direction: column;
 }
+
+/*pokemons*/
+#pokemons {
+  display: grid;
+}
+
 
 hr, #title-lista {
   position: relative;
