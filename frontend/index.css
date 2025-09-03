@@ -33,6 +33,14 @@ hr {
   background-color: aliceblue;
 }
 
+/*input de pesquisa*/
+#pokemon-search{
+  background-color: transparent;
+  border: solid 1px transparent;
+  border-bottom: solid 1px white;
+}
+
+
 /*Como o bloquinho é*/
 .bloquinho {
   width: 90%;
