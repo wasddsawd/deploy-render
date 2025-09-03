@@ -3,8 +3,6 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 3000;
-const __dirname
 
 // Configuração do PostgreSQL usando a Internal Database URL do Render
 const pool = new Pool({
