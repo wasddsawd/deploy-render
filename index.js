@@ -1,42 +1,36 @@
-import express from "express";
-import pg from "pg";
+const express = require("express");
+const cors = require("cors");
+const { Pool } = require("pg");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuração do PostgreSQL usando Internal Database URL do Render
-const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL, // Internal URL configurada no Render
+// Configuração do PostgreSQL usando a Internal Database URL do Render
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL, // defina no Render
   ssl: {
-    rejectUnauthorized: false, // obrigatório no Render
+    rejectUnauthorized: false, // necessário no Render
   },
 });
 
+app.use(cors());
 app.use(express.json());
 
 // Rota inicial de teste
 app.get("/", (req, res) => {
-  res.send("API rodando no Render");
+  res.send("API rodando no Render 🚀");
 });
 
-// Rota para inicializar banco e inserir dados de teste
+// Rota para inicializar banco
 app.get("/init", async (req, res) => {
   try {
-    // Cria tabela se não existir
     await pool.query(`
       CREATE TABLE IF NOT EXISTS usuarios (
         id SERIAL PRIMARY KEY,
         nome TEXT NOT NULL
       );
     `);
-
-    // Insere dados de exemplo
-    await pool.query(`
-      INSERT INTO usuarios (nome) VALUES ('Alice'), ('Bob')
-      ON CONFLICT DO NOTHING;
-    `);
-
-    res.send("Banco inicializado com dados de teste!");
+    res.send("Banco inicializado!");
   } catch (err) {
     console.error(err);
     res.status(500).send("Erro ao inicializar banco");
@@ -54,7 +48,7 @@ app.get("/usuarios", async (req, res) => {
   }
 });
 
-// Inserir um novo usuário
+// Inserir novo usuário
 app.post("/usuarios", async (req, res) => {
   const { nome } = req.body;
   try {
@@ -81,7 +75,7 @@ app.delete("/usuarios/:id", async (req, res) => {
   }
 });
 
-// Atualizar nome do usuário pelo ID
+// Atualizar usuário pelo ID
 app.put("/usuarios/:id", async (req, res) => {
   const { id } = req.params;
   const { nome } = req.body;
