@@ -16,9 +16,11 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static("public"));
+
 // Rota inicial de teste
 app.get("/", (req, res) => {
-  res.send("API rodando no Render 🚀");
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Rota para inicializar banco
