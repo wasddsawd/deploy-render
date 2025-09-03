@@ -109,6 +109,9 @@ hr {
   display: grid;
 }
 
+/*mini-bloco*/
+#mini-bloco
+
 
 hr, #title-lista {
   position: relative;
