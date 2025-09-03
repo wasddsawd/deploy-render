@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
-
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 // Configuração do PostgreSQL usando a Internal Database URL do Render
 const pool = new Pool({
   connectionString: process.env.pghost, // defina no Render
@@ -17,9 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Rota inicial de teste
-app.get("/", (req, res) => {
-  res.send("API rodando no Render 🚀");
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Rota para inicializar banco
 app.get("/init", async (req, res) => {
@@ -92,6 +89,6 @@ app.put("/usuarios/:id", async (req, res) => {
 });
 
 // Inicia o servidor
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
