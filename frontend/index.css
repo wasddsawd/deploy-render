@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+html, body {
+  height: 100%;
+}
+
+/*Como o aaab é*/
+#aaab {
+  width: 100%;
+  height: 100%; 
+  background-color: #f0f0f0; /* Cor de fundo para visualizar */
+  background-image: url(/frontend/images/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*Flex do aaab*/
+#aaab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+hr {
+  height: 1px;
+  width: 90%;
+  border: none;
+  background-color: aliceblue;
+}
+
+/*Como o bloquinho é*/
+.bloquinho {
+  width: 90%;
+  height: 90%;
+  background-color: rgba(255, 255, 255, 0.274);
+  border-radius: 40px;
+  border: solid 1px rgba(255, 255, 255, 0.384);
+  backdrop-filter: blur(5px);
+  box-shadow: 6px 4px 5px 2px rgba(0, 0, 0, 0.432);
+}
+
+/*flex do bloquinho*/
+.bloquinho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+hr, #title-lista {
+  position: relative;
+  top: 200px;
+}
