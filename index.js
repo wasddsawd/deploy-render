@@ -34,14 +34,14 @@ app.get("/init", async (req, res) => {
   }
 });
 
-// Listar todos os usuários
-app.get("/usuarios", async (req, res) => {
+// Listar todos os pokemons
+app.get("/pokemon", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM usuarios");
+    const result = await pool.query("SELECT * FROM pokemon");
     res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Erro ao buscar usuários");
+    res.status(500).send("Erro ao buscar pokemons");
   }
 });
 
