@@ -27,6 +27,7 @@
       async function renderizarPokemons() {
         try {
           const response = await fetch("https://teste-de-deploy-f2hi.onrender.com/pokemon"); // Caminho para seu arquivo JSON
+          const url = "https://teste-de-deploy-f2hi.onrender.com";
           const data = await response.json();
 
           const pokemonsContainer = document.getElementById("pokemons"); // Onde os cards de pokemon vao ser inseridos
@@ -42,7 +43,7 @@
             // Cria o conteúdo HTML para cada mini-bloco
             miniBloco.innerHTML = `
                         <div class="info-mini-bloco">
-                        <img src="${pokemon.imagem}" alt="${pokemon.nome}" class="pokemon-imagem">
+                        <img src="${url+pokemon.imagem}" alt="${pokemon.nome}" class="pokemon-imagem">
                         <div class="info">
                         <h2 class="pokemon-nome">${pokemon.nome}</h2>
                         <p class="pokemon-numero">#${pokemon.numero}</p>
