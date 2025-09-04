@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buscar Pokémon</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .pokemon-card {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            display: none; /* Inicia escondido */
-        }
-        .pokemon-card img { max-width: 100%; height: auto; }
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      .pokemon-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 8px;
+        display: none; /* Inicia escondido */
+      }
+      .pokemon-card img {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Buscar Pokémon</h1>
 
-    <input type="text" id="pokemonNome" placeholder="Digite o nome do Pokémon">
+    <input
+      type="text"
+      id="pokemonNome"
+      placeholder="Digite o nome do Pokémon"
+    />
     <button id="buscarBtn">Buscar</button>
 
-    <div id="resultado" class="pokemon-card">
-        </div>
+    <div id="resultado" class="pokemon-card"></div>
 
     <script>
-        // 1. Pega os elementos do HTML
-        const inputNome = document.getElementById('pokemonNome');
-        const buscarBtn = document.getElementById('buscarBtn');
-        const resultadoDiv = document.getElementById('resultado');
+      // 1. Pega os elementos do HTML
+      const inputNome = document.getElementById("pokemonNome");
+      const buscarBtn = document.getElementById("buscarBtn");
+      const resultadoDiv = document.getElementById("resultado");
 
-        // 2. Adiciona um "ouvinte" de evento para o botão de busca
-        buscarBtn.addEventListener('click', async () => {
-            const nomeDoPokemon = inputNome.value.toLowerCase();
-            if (!nomeDoPokemon) {
-                alert("Por favor, digite um nome de Pokémon.");
-                return;
+      // 2. Adiciona um "ouvinte" de evento para o botão de busca
+      buscarBtn.addEventListener("click", async () => {
+        const nomeDoPokemon = inputNome.value.toLowerCase();
+        if (!nomeDoPokemon) {
+          alert("Por favor, digite um nome de Pokémon.");
+          return;
+        }
+
+        const url = `https://teste-de-deploy-f2hi.onrender.com/pokemon/${nomeDoPokemon}`;
+
+        try {
+          // 3. Faz a requisição usando fetch
+          const response = await fetch(url);
+
+          // 4. Verifica se a requisição foi bem-sucedida (status 200)
+          if (!response.ok) {
+            // Se o status for 404 (não encontrado) ou outro erro
+            if (response.status === 404) {
+              resultadoDiv.innerHTML = "<p>Pokémon não encontrado.</p>";
+              resultadoDiv.style.display = "block";
+            } else {
+              resultadoDiv.innerHTML = "<p>Erro ao buscar dados.</p>";
+              resultadoDiv.style.display = "block";
             }
+            return;
+          }
 
-            const url = `http://localhost:3000/pokemon/${nomeDoPokemon}`;
+          // 5. Converte a resposta para um objeto JSON
+          const pokemon = await response.json();
 
-            try {
-                // 3. Faz a requisição usando fetch
-                const response = await fetch(url);
-
-                // 4. Verifica se a requisição foi bem-sucedida (status 200)
-                if (!response.ok) {
-                    // Se o status for 404 (não encontrado) ou outro erro
-                    if (response.status === 404) {
-                        resultadoDiv.innerHTML = '<p>Pokémon não encontrado.</p>';
-                        resultadoDiv.style.display = 'block';
-                    } else {
-                        resultadoDiv.innerHTML = '<p>Erro ao buscar dados.</p>';
-                        resultadoDiv.style.display = 'block';
-                    }
-                    return;
-                }
-
-                // 5. Converte a resposta para um objeto JSON
-                const pokemon = await response.json();
-
-                // 6. Atualiza o HTML com os dados recebidos
-                resultadoDiv.innerHTML = `
+          // 6. Atualiza o HTML com os dados recebidos
+          resultadoDiv.innerHTML = `
                     <h2>${pokemon.nome}</h2>
                     <p><strong>Tipo:</strong> ${pokemon.tipo} / ${pokemon.tipo2}</p>
                     <p><strong>Região:</strong> ${pokemon.regiao}</p>
@@ -71,15 +79,14 @@
                     <p><strong>Altura:</strong> ${pokemon.altura} m</p>
                     <img src="${pokemon.imagem_principal}" alt="Imagem de ${pokemon.nome}">
                 `;
-                resultadoDiv.style.display = 'block';
-
-            } catch (error) {
-                console.error("Erro de requisição:", error);
-                resultadoDiv.innerHTML = '<p>Ocorreu um erro ao conectar ao servidor.</p>';
-                resultadoDiv.style.display = 'block';
-            }
-        });
+          resultadoDiv.style.display = "block";
+        } catch (error) {
+          console.error("Erro de requisição:", error);
+          resultadoDiv.innerHTML =
+            "<p>Ocorreu um erro ao conectar ao servidor.</p>";
+          resultadoDiv.style.display = "block";
+        }
+      });
     </script>
-
-</body>
+  </body>
 </html>
