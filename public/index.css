@@ -59,7 +59,7 @@ hr {
 #lupa{
   height: 22px;
   width: 22px;
-  background-image: url(/public/Images/1093183.svg);
+  background-image: url(/images/1093183.svg);
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -168,7 +168,7 @@ hr {
   width: 180px;
   justify-self: center;
   filter: drop-shadow(0 0 10px rgb(255, 255, 255));
-  background-image: url(/public/Images/pokebola.png);
+  background-image: url(/images/pokebola.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
