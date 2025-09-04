@@ -53,7 +53,7 @@ app.get("/pokemon/:nome", async (req, res) => {
       `
       SELECT p.*, p.imagem AS imagem_principal
       FROM pokemons AS p
-      WHERE p.nome = ?
+      WHERE p.nome = $1
     `,
       [req.params.nome]
     );
