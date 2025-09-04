@@ -4,9 +4,10 @@ const { Pool } = require("pg");
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 // Configuração do PostgreSQL usando a Internal Database URL do Render
 const pool = new Pool({
-  connectionString: process.env.pghost, // defina no Render
+  connectionString: process.env.DATABASE_URL, // defina no Render
   ssl: {
     rejectUnauthorized: false, // necessário no Render
   },
