@@ -16,8 +16,8 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
-// Rota inicial de teste
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // Rota para inicializar banco
 app.get("/init", async (req, res) => {
