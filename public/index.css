@@ -129,6 +129,12 @@ hr {
   margin-top: 20px;
   align-self: center;
   padding: 20px;
+  transition: 0.3s ease;
+}
+
+.mini-bloco:hover {
+  transform: scale(1.05) translateY(-10px);
+  
 }
 
 .info-mini-bloco {
