@@ -13,6 +13,7 @@ background-image: linear-gradient(to bottom, rgb(124, 124, 124), rgb(255, 255, 2
 
 ::placeholder {
   color: rgba(0, 0, 0, 0.671);
+  font-size: large;
 }
 input:focus {
   outline: none;
@@ -20,6 +21,7 @@ input:focus {
 
 input {
   color: rgba(0, 0, 0, 0.767);
+  height: 40px;
 }
 
 #fundo {
@@ -61,8 +63,8 @@ hr {
 
 /*lupa*/
 #lupa{
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   background-image: url(/public/Images/1093183.svg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -81,7 +83,7 @@ hr {
 
 /*input de pesquisa, posição*/
 #pokemon-search {
-  margin-top: 20px;
+  margin-top: 25px;
   margin-inline: 60px;
 }
 
@@ -110,14 +112,16 @@ hr {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  gap: 20px;
+  gap: 22px;
   justify-items: center;
   align-items: center;
+  overflow-y: auto;
+  padding-bottom: 10px;
 }
 
 /*mini-bloco*/
 .mini-bloco {
-  width: 250px;
+  width: 90%;
   height: 340px;
   background-color: rgba(255, 255, 255, 0.274);
   border-radius: 40px;
@@ -131,4 +135,22 @@ hr {
 hr, #title-lista {
   position: relative;
   top: 200px;
+}
+
+@media screen and (max-width:1084px) {
+  #pokemons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width:778px) {
+  #pokemons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:500px) {
+  #pokemons {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
