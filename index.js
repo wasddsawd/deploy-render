@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/init", async (req, res) => {
   try {
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS usuarios (
+      CREATE TABLE IF NOT EXISTS pokemon (
         id SERIAL PRIMARY KEY,
         nome TEXT NOT NULL
       );
@@ -46,48 +46,29 @@ app.get("/pokemon", async (req, res) => {
   }
 });
 
-// Inserir novo usuário
-app.post("/usuarios", async (req, res) => {
-  const { nome } = req.body;
+//mecanismo de busca
+app.get("/pokemon/:nome", async (req, res) => {
   try {
-    const result = await pool.query(
-      "INSERT INTO usuarios (nome) VALUES ($1) RETURNING *",
-      [nome]
+    const [rows] = await pool.query(
+      `
+      SELECT p.*, p.imagem AS imagem_principal
+      FROM pokemons AS p
+      WHERE p.nome = ?
+    `,
+      [req.params.nome]
     );
-    res.json(result.rows[0]);
+
+    if (rows.length === 0)
+      return res.status(404).json({ error: "Pokemon não encontrado." });
+
+    res.json(rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro ao inserir usuário");
+    console.error("Erro ao buscar instrumento:", err);
+    res.status(500).json({ error: "Erro interno no servidor." });
   }
 });
 
-// Deletar usuário pelo ID
-app.delete("/usuarios/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    await pool.query("DELETE FROM usuarios WHERE id = $1", [id]);
-    res.send(`Usuário ${id} deletado`);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro ao deletar usuário");
-  }
-});
 
-// Atualizar usuário pelo ID
-app.put("/usuarios/:id", async (req, res) => {
-  const { id } = req.params;
-  const { nome } = req.body;
-  try {
-    const result = await pool.query(
-      "UPDATE usuarios SET nome = $1 WHERE id = $2 RETURNING *",
-      [nome, id]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro ao atualizar usuário");
-  }
-});
 
 // Inicia o servidor
 app.listen(process.env.PORT || 3000, () => {
