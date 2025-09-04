@@ -4,9 +4,10 @@ const { Pool } = require("pg");
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 // Configuração do PostgreSQL usando a Internal Database URL do Render
 const pool = new Pool({
-  connectionString: process.env.pghost, // defina no Render
+  connectionString: process.env.DATABASE_URL, // defina no Render
   ssl: {
     rejectUnauthorized: false, // necessário no Render
   },
@@ -34,14 +35,14 @@ app.get("/init", async (req, res) => {
   }
 });
 
-// Listar todos os usuários
-app.get("/usuarios", async (req, res) => {
+// Listar todos os pokemons
+app.get("/pokemon", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM usuarios");
+    const result = await pool.query("SELECT * FROM pokemon");
     res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Erro ao buscar usuários");
+    res.status(500).send("Erro ao buscar pokemons");
   }
 });
 
