@@ -49,7 +49,7 @@ app.get("/pokemon", async (req, res) => {
 //mecanismo de busca
 app.get("/pokemon/:nome", async (req, res) => {
   try {
-    const [rows] = await pool.query(
+    const { rows } = await pool.query(
       `
       SELECT p.*, p.imagem AS imagem_principal
       FROM pokemon AS p
@@ -63,7 +63,7 @@ app.get("/pokemon/:nome", async (req, res) => {
 
     res.json(rows[0]);
   } catch (err) {
-    console.error("Erro ao buscar instrumento:", err);
+    console.error("Erro ao buscar pokemon:", err);
     res.status(500).json({ error: "Erro interno no servidor." });
   }
 });
