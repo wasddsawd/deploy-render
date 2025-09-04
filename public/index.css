@@ -21,7 +21,7 @@ input:focus {
 
 input {
   color: rgba(0, 0, 0, 0.767);
-  height: 40px;
+  font-size: large;
 }
 
 #fundo {
@@ -87,7 +87,6 @@ hr {
   margin-inline: 60px;
 }
 
-
 /*Como o bloquinho é*/
 .bloquinho {
   width: 90%;
@@ -121,7 +120,7 @@ hr {
 
 /*mini-bloco*/
 .mini-bloco {
-  width: 90%;
+  width: 80%;
   height: 340px;
   background-color: rgba(255, 255, 255, 0.274);
   border-radius: 40px;
@@ -129,8 +128,29 @@ hr {
   box-shadow: 6px 4px 5px 2px rgba(0, 0, 0, 0.432);
   margin-top: 20px;
   align-self: center;
+  padding: 20px;
 }
 
+.info-mini-bloco {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.pokemon-imagem {
+  height: 180px;
+  width: 180px;
+  justify-self: center;
+  filter: drop-shadow(0 0 10px white);
+}
+
+.info {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 hr, #title-lista {
   position: relative;

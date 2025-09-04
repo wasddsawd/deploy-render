@@ -13,21 +13,60 @@
         <div #pesquisa></div>
         <div id="lupa"></div>
         <label for="pokemon-search"></label>
-        <input type="text" id="pokemon-search" name="pokemon-search" placeholder="Nome do Pokémon"/>
-        <div id="pokemons">
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-          <div class="mini-bloco"></div>
-        </div>
+        <input
+          type="text"
+          id="pokemon-search"
+          name="pokemon-search"
+          placeholder="Nome do Pokémon"
+        />
+        <div id="pokemons"></div>
       </div>
     </section>
     <script>
-      
+      // Função para buscar os dados do JSON e renderizar os Pokémons
+      async function renderizarPokemons() {
+        try {
+          const response = await fetch("https://teste-de-deploy-f2hi.onrender.com/pokemon"); // Caminho para seu arquivo JSON
+          const data = await response.json();
+
+          const pokemonsContainer = document.getElementById("pokemons"); // Onde os cards de pokemon vao ser inseridos
+
+          // Limpa o container antes de adicionar novos pokemons (útil se você for filtrar)
+          pokemonsContainer.innerHTML = "";
+
+          data.forEach((pokemon) => {
+            // Cria um novo div para cada pokemon
+            const miniBloco = document.createElement("div");
+            miniBloco.classList.add("mini-bloco"); // Adiciona a classe CSS para estilização
+
+            // Cria o conteúdo HTML para cada mini-bloco
+            miniBloco.innerHTML = `
+                        <div class="info-mini-bloco">
+                        <img src="${pokemon.imagem}" alt="${pokemon.nome}" class="pokemon-imagem">
+                        <div class="info">
+                        <h2 class="pokemon-nome">${pokemon.nome}</h2>
+                        <p class="pokemon-numero">#${pokemon.numero}</p>
+                        <p class="pokemon-tipo">Tipo: ${pokemon.tipo}${pokemon.tipo2 ? ` / ${pokemon.tipo2}` : ""}</p>
+                        <p class="pokemon-regiao">Região: ${pokemon.regiao}</p>
+                        <p class="pokemon-peso">Peso: ${pokemon.peso}kg</p>
+                        <p class="pokemon-altura">Altura: ${pokemon.altura}m</p>
+                        </div>
+                        </div>
+                    `;
+
+            // Adiciona o mini-bloco criado ao container principal de pokemons
+            pokemonsContainer.appendChild(miniBloco);
+          });
+        } catch (error) {
+          console.error(
+            "Ocorreu um erro ao carregar os dados dos Pokémons:",
+            error
+          );
+        }
+      }
+
+      // Chama a função para renderizar os pokémons quando a página carregar
+      document.addEventListener("DOMContentLoaded", renderizarPokemons);
     </script>
   </body>
 </html>
