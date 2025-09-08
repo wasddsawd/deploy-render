@@ -101,7 +101,7 @@ hr {
 
 /*pokemons*/
 #pokemons {
-  margin: 30px;
+  padding: 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
@@ -185,19 +185,19 @@ hr, #title-lista {
   top: 200px;
 }
 
-@media screen and (max-width:1084px) {
+@media screen and (max-width:1120px) {
   #pokemons {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (max-width:778px) {
+@media screen and (max-width:843px) {
   #pokemons {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:570px) {
   #pokemons {
     grid-template-columns: repeat(1, 1fr);
   }
