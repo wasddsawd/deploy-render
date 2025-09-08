@@ -168,7 +168,7 @@ hr {
   width: 180px;
   justify-self: center;
   filter: drop-shadow(0 0 10px rgb(255, 255, 255));
-  background-image: url(/images/pokebola.png);
+  background-image: url(/public/images/pokebola.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
